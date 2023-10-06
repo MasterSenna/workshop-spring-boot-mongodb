@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Interagindo com a API</title>
+</head>
+
+<body>
+	<h1>Interagindo com a API</h1>
+
+	<!-- Formulário para buscar posts por título -->
+	<h2>Buscar Posts por Titulo</h2>
+	<form id="searchForm">
+		<input type="text" id="searchTitle" placeholder="Titulo do Post">
+		<button type="submit">Buscar</button>
+	</form>
+
+	<h3>Resultados da Busca:</h3>
+	<ul id="searchResults">
+		<!-- Os resultados da busca serão exibidos aqui -->
+	</ul>
+
+	<!-- Script JavaScript para interagir com a API -->
+	<script>
+		document.getElementById("searchForm").addEventListener("submit", function (e) {
+			e.preventDefault();
+			const searchTitle = document.getElementById("searchTitle").value;
+
+			// Fazer uma requisição à sua API para buscar posts por título
+			// Substitua a URL pela URL da sua API
+			fetch(`http://localhost:8080/users/${searchTitle}`)
+				.then((response) => {
+					if (!response.ok) {
+						throw new Error(`HTTP error! Status: ${response.status}`);
+					}
+					return response.json();
+				})
+				.then((data) => {
+					// Faça algo com os dados recebidos da API
+					console.log(data);
+				})
+				.catch((error) => {
+					console.error("Fetch error:", error);
+				});
+		});
+	</script>
+</body>
+
+</html>
